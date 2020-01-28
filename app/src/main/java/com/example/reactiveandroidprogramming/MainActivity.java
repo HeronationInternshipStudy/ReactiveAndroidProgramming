@@ -19,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
     private StockDataAdapter stockDataAdapter;
 
-    @BindView(R.id.hello_world)
-    TextView helloText;
-
     @BindView(R.id.stock_updates_recycler_view)
     RecyclerView recyclerView;
 
@@ -31,15 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-
-        Observable.just("Hellow! Please use this app responsibly!")
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        helloText.setText(s);
-                    }
-                });
-
+        
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
@@ -49,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         Observable.just(
                 new StockUpdate("GOOGLE",12.43,new Date()),
-                new StockUpdate("APPL",12.43 ,new Date()),
-                new StockUpdate("TWTR",12.43, new Date())
+                new StockUpdate("APPL",645.1 ,new Date()),
+                new StockUpdate("TWTR",1.43, new Date())
         )
                 .subscribe(stockDataAdapter::add);
     }
