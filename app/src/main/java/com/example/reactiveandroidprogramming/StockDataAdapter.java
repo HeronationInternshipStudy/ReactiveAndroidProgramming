@@ -13,7 +13,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder> {
-    private final List<String> data=new ArrayList<>();
+    private final List<StockUpdate> data=new ArrayList<>();
 
     @NonNull
     @Override
@@ -26,7 +26,10 @@ public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull StockUpdateViewHolder holder, int position) {
-        holder.stockSymbol.setText(data.get(position));
+        StockUpdate stockUpdate=data.get(position);
+        holder.setStockSymbol(stockUpdate.getStockSymbol());
+        holder.setStockPrice(stockUpdate.getPrice());
+        holder.setStockDate(stockUpdate.getDate());
     }
 
     @Override
@@ -34,9 +37,9 @@ public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder
         return data.size();
     }
 
-    public void add(String stockSymbol){
+    public void add(StockUpdate stockSymbol) {
         this.data.add(stockSymbol);
-        notifyItemInserted(data.size()-1);
+        notifyItemInserted(data.size() - 1);
     }
 
 }
