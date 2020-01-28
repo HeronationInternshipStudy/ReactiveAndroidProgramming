@@ -43,4 +43,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
     implementation 'com.jakewharton.rxbinding3:rxbinding-recyclerview:3.1.0'
     implementation 'com.github.akarnokd:rxjava3-interop:3.0.0-RC8'
+
+    // cardview
+    implementation "com.google.android.material:material:1.0.0"
 }
