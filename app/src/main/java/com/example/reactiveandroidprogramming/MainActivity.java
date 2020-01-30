@@ -15,9 +15,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
@@ -40,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         stockDataAdapter=new StockDataAdapter();
         recyclerView.setAdapter(stockDataAdapter);
 
+        YahooService yahooService=new RetrofitYahooServiceFactory().create();
+        String query="select * from yahoo.finance.quote where symbol in ('YHOO','AAPL','GOOG','MSFT')";
+        String env="store://datatables.org/alltableswithkeys";
+
         Observable.just(
                 new StockUpdate("GOOGLE",12.43,new Date()),
                 new StockUpdate("APPL",645.1 ,new Date()),
@@ -53,5 +60,13 @@ public class MainActivity extends AppCompatActivity {
 	            .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(e->Log.d("App","subscribe:"+Thread.currentThread().getName()
                 +":"+e));
+    }
+
+    public interface YahooService {
+        @GET("yql?format=json")
+        Single<YahooStockResult> yqlQuery(
+          @Query("q") String query,
+          @Query("env") String env
+        );
     }
 }

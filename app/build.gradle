@@ -46,4 +46,15 @@ dependencies {
 
     // cardview
     implementation "com.google.android.material:material:1.0.0"
+
+    //핵심 레트로핏 라이브러리
+    implementation "com.squareup.retrofit2:retrofit:2.7.1"
+    //GsonConverterFactory 클래스를 사용할 수 있게 하며 레트로핏이 JSON 응답을 분석할 때 사용
+    implementation "com.squareup.retrofit2:converter-gson:2.7.1"
+    //RxJava 라이브러리와 옵저버블을 이용해 HTTP 응답을 읽을 수 있도록 함
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
+    //레트로핏에 로그를 남기기 위해 디펜던시를 설정하는 부분
+    implementation "com.squareup.okhttp3:okhttp:4.3.1"
+    implementation"com.squareup.okhttp3:logging-interceptor:4.3.1"
+
 }
