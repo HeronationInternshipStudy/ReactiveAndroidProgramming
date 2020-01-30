@@ -43,10 +43,7 @@ public class MainActivity extends AppCompatActivity {
         stockDataAdapter=new StockDataAdapter();
         recyclerView.setAdapter(stockDataAdapter);
 
-        YahooService yahooService=new RetrofitYahooServiceFactory().create();
-        String query="select * from yahoo.finance.quote where symbol in ('YHOO','AAPL','GOOG','MSFT')";
-        String env="store://datatables.org/alltableswithkeys";
-
+        
         Observable.just(
                 new StockUpdate("GOOGLE",12.43,new Date()),
                 new StockUpdate("APPL",645.1 ,new Date()),
@@ -62,11 +59,5 @@ public class MainActivity extends AppCompatActivity {
                 +":"+e));
     }
 
-    public interface YahooService {
-        @GET("yql?format=json")
-        Single<YahooStockResult> yqlQuery(
-          @Query("q") String query,
-          @Query("env") String env
-        );
-    }
+
 }
